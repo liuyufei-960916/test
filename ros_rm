@@ -1,0 +1,26 @@
+# 创建一个工作空间（workspace）
+# 工作区可以作为一个独立的项目进行编译，存放ROS程序的源文件、编译文件和执行文件。建立工作区的方法如下
+mkdir -p ~/catkin_ws/src  //在主文件夹路径下创建一个文件夹，src是catkin_ws的子文件夹
+cd ~/catkin_ws/src        //进入子目录src
+catkin_init_workspace     //初始化工作空间
+
+# 虽然这时候工作区是空的，但是我们依然可以进行编译：
+cd ~/catkin_ws/   //进入catkin_ws路径
+catkin_make       //编译package，虽然是空的
+# 这时候，会在当前文件夹下生成devel，build这两个子文件夹，在devel文件夹下能看到几个setup.*sh文件
+
+# 接下来把工作区在bash中注册
+source devel/setup.bash 
+
+# 要验证是否已经在bash中注册可以使用如下命令：
+echo $ROS_PACKAGE_PATH
+
+# 创建一个ROS数据包（Package）
+cd ~/catkin_ws/src
+
+# 现在可以使用catkin_create_pkg命令去创建一个叫beginner_tutorials的包，这个包依靠std_msgs、roscpp、rospy。
+catkin_create_pkg beginner_tutorials std_msgs rospy roscpp 
+
+#接下来在工作区编译这个工程包
+cd ~/catkin_ws  
+catkin_make  
